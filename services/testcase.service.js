@@ -23,14 +23,14 @@ const runFromSpecifiedCommandOfTestcase = async(page) => {
         return isPlaying === false;
     }, { timeout: 0 });
     let result = await page.evaluate(function() {
-        return ($(`#case1`).hasClass("success"));
+        return $(`#case1`).hasClass("success");
     }, 0);
     return result;
 }
 
-const runCommandOfTestCase = async() => {
+const runCommandOfTestCase = async(page) => {
     await page.click('#case1');
-    await page.click('#records-1', {
+    await page.click('#records-2', {
         button: 'right',
     });
     await page.click('#grid-play-this-command');
@@ -39,12 +39,10 @@ const runCommandOfTestCase = async() => {
         return isPlaying === false;
     }, { timeout: 0 });
     let result = await page.evaluate(function() {
-        return $(`#records-1`).hasClass("success");
+        return $(`#records-2`).hasClass("success");
     }, 0);
     return result;
 }
-
-
 
 module.exports = {
     runTestcase,

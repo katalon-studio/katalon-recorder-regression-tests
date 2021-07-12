@@ -22,7 +22,7 @@ const getPageAndData = async(testsuitePath) => {
                         passedTestCase: 0
                     },
                 };
-                browser.storage.local.set(result);
+                chrome.storage.local.set(result);
             })
             // await data.removeExistingData(page);
 
