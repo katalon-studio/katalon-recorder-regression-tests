@@ -34,25 +34,31 @@ const { config } = require('./configs/config-env');
         // for (let i = 0; i < testCases.count; i++) {
         // await page.waitForTimeout(1000);
         console.log(`Executing test case ${0}`);
-        await page.waitForSelector("#case0");
-        await page.click('#case0');
+        page.on('load', async() => {
+            await page.evaluate(() => {
+                $('#case1').click();
+            }, 0);
+            await page.click('#case1', {
+                button: 'right'
+            });
+            await page.evaluate(function() {
+                $('#menucase1').find('a')[3].click();
+            }, 0);
+            await page.waitForTimeout(500);
+            await page.waitForFunction(function() {
+                return $('#stop').is(':visible') === false;
+            }, { timeout: 0 });
+            let result = await page.evaluate(async function() {
+                return {
+                    pass: parseFloat($(`#result-runs`).html()),
+                    fail: parseFloat($(`#result-failures`).html())
+                };
+            }, 0);
+            console.log(result);
+        })
 
-        await page.waitForTimeout(1000);
-        await page.evaluate(() => {
-            // setTimeout(() => {
-            console.log($('#playback'))
-            $('#playback').click();
-            // }, 1000);
-        }, 0);
 
-        await page.waitForTimeout(500);
-        await page.waitForFunction(function() {
-            return $('#stop').is(':visible') === false;
-        }, { timeout: 0 });
-        let result = await page.evaluate(function() {
-            return $(`#case${0}`).hasClass("success");
-        }, 0);
-        console.log(result);
+
         // }
 
 

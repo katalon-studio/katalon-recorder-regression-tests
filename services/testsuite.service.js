@@ -1,7 +1,8 @@
 const runTestSuite = async(page) => {
-    await page.waitForSelector("#case0");
-    await page.click('#case0');
-    await page.click('#playSuite');
+    await page.evaluate(() => {
+        $('#case0').click();
+        $('#playSuite').click();
+    }, 0);
     await page.waitForTimeout(500);
     await page.waitForFunction(function() {
         return $('#stop').is(':visible') === false;
@@ -16,9 +17,10 @@ const runTestSuite = async(page) => {
 }
 
 const runAllTestSuites = async(page) => {
-    await page.waitForSelector("#case1");
-    await page.click('#case1');
-    await page.click('#playSuites');
+    await page.evaluate(() => {
+        $('#case0').click();
+        $('#playSuites').click();
+    }, 0);
     await page.waitForTimeout(500);
     await page.waitForFunction(function() {
         return $('#stop').is(':visible') === false;
@@ -33,8 +35,9 @@ const runAllTestSuites = async(page) => {
 }
 
 const runFromSpecifiedTestcase = async(page) => {
-    await page.waitForSelector("#case1");
-    await page.click('#case1');
+    await page.evaluate(() => {
+        $('#case1').click();
+    }, 0);
     await page.click('#case1', {
         button: 'right'
     });
