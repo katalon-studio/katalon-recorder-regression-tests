@@ -22,37 +22,37 @@ const { config } = require('./configs/config-env');
                         passedTestCase: 0
                     },
                 };
-                browser.storage.local.set(result);
+                chrome.storage.local.set(result);
             })
             // await data.removeExistingData(page);
 
-        const htmlFilePath = "sample/data2.html";
+        const htmlFilePath = "sample/data.html";
         let sample = await data.loadSampleDataFile(htmlFilePath);
-        let testCases = await data.loadTestSuiteToExtension(page, sample);
+        await data.loadTestSuiteToExtension(page, sample)
 
         //play step by step and check status
         // for (let i = 0; i < testCases.count; i++) {
-
+        // await page.waitForTimeout(1000);
         console.log(`Executing test case ${0}`);
-        await page.click('#case1');
-        await page.click('#playSuite');
-        // await page.evaluate(function() {
-        //     $(`#case${1}`).click();
-        //     $(`#records-${2}`).click();
-        //     $(`#records-${2}`).contextmenu();
-        //     console.log($('#grid-play-from-here').find("a").click())
-        //     $('#grid-play-from-here').find("a").click();
-        //     // $("#playback").click();
-        // }, 0);
+        await page.waitForSelector("#case0");
+        await page.click('#case0');
+
+        await page.waitForTimeout(1000);
+        await page.evaluate(() => {
+            // setTimeout(() => {
+            console.log($('#playback'))
+            $('#playback').click();
+            // }, 1000);
+        }, 0);
+
         await page.waitForTimeout(500);
-        await page.waitForSelector("#playSuite");
         await page.waitForFunction(function() {
-            isPlayingSuite === false;
+            return $('#stop').is(':visible') === false;
         }, { timeout: 0 });
         let result = await page.evaluate(function() {
-            return ($(`#result-runs`).html());
+            return $(`#case${0}`).hasClass("success");
         }, 0);
-        console.log(`testcase 1: ${result}`);
+        console.log(result);
         // }
 
 

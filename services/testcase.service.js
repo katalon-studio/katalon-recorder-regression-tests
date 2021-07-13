@@ -1,6 +1,15 @@
 const runTestcase = async(page) => {
+    await page.waitForSelector("#case0");
     await page.click('#case0');
-    await page.click('#playback');
+
+    await page.waitForTimeout(1000);
+    await page.evaluate(() => {
+        setTimeout(() => {
+            console.log($('#playback'))
+            $('#playback').click();
+        }, 1000);
+    }, 0);
+
     await page.waitForTimeout(500);
     await page.waitForFunction(function() {
         return isPlaying === false;
@@ -12,6 +21,7 @@ const runTestcase = async(page) => {
 }
 
 const runFromSpecifiedCommandOfTestcase = async(page) => {
+    await page.waitForSelector("#case1");
     await page.click('#case1');
     await page.click('#records-2');
     await page.click('#records-2', {
@@ -29,6 +39,7 @@ const runFromSpecifiedCommandOfTestcase = async(page) => {
 }
 
 const runCommandOfTestCase = async(page) => {
+    await page.waitForSelector("#case1");
     await page.click('#case1');
     await page.click('#records-2', {
         button: 'right',

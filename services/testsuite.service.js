@@ -1,5 +1,6 @@
 const runTestSuite = async(page) => {
-    await page.click('#case1');
+    await page.waitForSelector("#case0");
+    await page.click('#case0');
     await page.click('#playSuite');
     await page.waitForTimeout(500);
     await page.waitForFunction(function() {
@@ -15,6 +16,7 @@ const runTestSuite = async(page) => {
 }
 
 const runAllTestSuites = async(page) => {
+    await page.waitForSelector("#case1");
     await page.click('#case1');
     await page.click('#playSuites');
     await page.waitForTimeout(500);
@@ -31,6 +33,7 @@ const runAllTestSuites = async(page) => {
 }
 
 const runFromSpecifiedTestcase = async(page) => {
+    await page.waitForSelector("#case1");
     await page.click('#case1');
     await page.click('#case1', {
         button: 'right'
