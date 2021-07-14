@@ -8,7 +8,7 @@ describe("Run test suite", () => {
         let result = await TestSuiteService.runTestSuite(extension.page);
         await extension.browser.close();
         await expect(result).toMatchObject({ pass: 11, fail: 3 });
-    }, 100000);
+    }, 1000000);
 
     it("Run all test suites", async() => {
         let extension = await ExtensionService.getPageAndData("sample/data2.html");
@@ -16,7 +16,7 @@ describe("Run test suite", () => {
         let result = await TestSuiteService.runAllTestSuites(extension.page);
         await extension.browser.close();
         await expect(result).toMatchObject({ pass: 11, fail: 3 });
-    }, 100000)
+    }, 1000000)
 
     it("Run a test suite from specified test case", async() => {
         let extension = await ExtensionService.getPageAndData("sample/data2.html");
@@ -24,5 +24,5 @@ describe("Run test suite", () => {
         let result = await TestSuiteService.runFromSpecifiedTestcase(extension.page);
         await extension.browser.close();
         expect(result).toMatchObject({ pass: 10, fail: 3 });
-    }, 100000)
+    }, 1000000)
 });
