@@ -9,7 +9,7 @@ describe("Run test case", () => {
         let result = await TestCaseService.runTestcase(extension.page);
         await expect(result).toBe(true);
         await extension.browser.close();
-    }, 1000000);
+    });
 
     it("Run a test case from specified command", async() => {
         let extension = await ExtensionService.getPageAndData("sample/data.html");
@@ -17,7 +17,7 @@ describe("Run test case", () => {
         let result = await TestCaseService.runFromSpecifiedCommandOfTestcase(extension.page);
         await expect(result).toBe(true);
         await extension.browser.close();
-    }, 1000000);
+    });
 
     it("Run a test case from specified command", async() => {
         let extension = await ExtensionService.getPageAndData("sample/data.html");
@@ -25,5 +25,5 @@ describe("Run test case", () => {
         let result = await TestCaseService.runCommandOfTestCase(extension.page);
         await expect(result).toBe(true);
         await extension.browser.close();
-    }, 1000000);
+    });
 });
