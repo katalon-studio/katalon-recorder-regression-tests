@@ -46,7 +46,7 @@ const runCommandOfTestCase = async(page) => {
         return isPlaying === false;
     }, { timeout: 0 });
     let result = await page.evaluate(function() {
-        return $(`#records-2`).hasClass("success");
+        return $(`#records-2`).hasClass("executing");
     }, 0);
     return result;
 }

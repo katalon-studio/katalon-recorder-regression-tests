@@ -2,36 +2,27 @@ const ExtensionService = require('../services/extension.service');
 const TestSuiteService = require('../services/testsuite.service');
 
 describe("Run test suite", () => {
-    let extension = {};
+    it("Run a test suite", async() => {
+        let extension = await ExtensionService.getPageAndData("sample/data2.html");
+        await new Promise((resolve) => extension.page.on('load', resolve));
+        let result = await TestSuiteService.runTestSuite(extension.page);
+        await extension.browser.close();
+        await expect(result).toMatchObject({ pass: 11, fail: 3 });
+    }, 100000);
 
-    beforeAll(async() => {
-        extension = await ExtensionService.getPageAndData("sample/data2.html");
-    }, 10000);
+    it("Run all test suites", async() => {
+        let extension = await ExtensionService.getPageAndData("sample/data2.html");
+        await new Promise((resolve) => extension.page.on('load', resolve));
+        let result = await TestSuiteService.runAllTestSuites(extension.page);
+        await extension.browser.close();
+        await expect(result).toMatchObject({ pass: 11, fail: 3 });
+    }, 100000)
 
-    beforeEach(async() => {
-        await extension.page.waitForTimeout(1000);
-    })
-
-    it("Run a test case without conditions", async() => {
-        extension.page.on('load', async() => {
-            let result = await TestSuiteService.runTestSuite(extension.page);
-            await expect(result).toMatchObject({ pass: 13, fail: 2 });
-        })
-    }, 20000);
-
-    it("Run a test case from specified command", async() => {
-        extension.page.on('load', async() => {
-            let result = await TestSuiteService.runAllTestSuites(extension.page);
-            await expect(result).toMatchObject({ pass: 13, fail: 2 });
-        })
-    }, 30000)
-
-    it("Run a test case from specified command", async() => {
-        extension.page.on('load', async() => {
-            let result = await TestSuiteService.runFromSpecifiedTestcase(extension.page);
-            expect(result).toMatchObject({ pass: 10, fail: 2 });
-        })
-    }, 40000)
-
-    afterAll(async() => { await extension.browser.close() }, 50000);
+    it("Run a test suite from specified test case", async() => {
+        let extension = await ExtensionService.getPageAndData("sample/data2.html");
+        await new Promise((resolve) => extension.page.on('load', resolve));
+        let result = await TestSuiteService.runFromSpecifiedTestcase(extension.page);
+        await extension.browser.close();
+        expect(result).toMatchObject({ pass: 10, fail: 3 });
+    }, 100000)
 });

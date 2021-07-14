@@ -34,28 +34,31 @@ const { config } = require('./configs/config-env');
         // for (let i = 0; i < testCases.count; i++) {
         // await page.waitForTimeout(1000);
         console.log(`Executing test case ${0}`);
-        page.on('load', async() => {
-            await page.evaluate(() => {
-                $('#case1').click();
-            }, 0);
-            await page.click('#case1', {
-                button: 'right'
-            });
-            await page.evaluate(function() {
-                $('#menucase1').find('a')[3].click();
-            }, 0);
-            await page.waitForTimeout(500);
-            await page.waitForFunction(function() {
-                return $('#stop').is(':visible') === false;
-            }, { timeout: 0 });
-            let result = await page.evaluate(async function() {
-                return {
-                    pass: parseFloat($(`#result-runs`).html()),
-                    fail: parseFloat($(`#result-failures`).html())
-                };
-            }, 0);
-            console.log(result);
-        })
+        // await new Promise((resolve) => page.on('load', resolve));
+        await page.waitForTimeout(500);
+        // page.on('load', async() => {
+        await page.waitForSelector('#case1');
+        await page.evaluate(() => {
+            $('#case1').click();
+            $('#records-2').click();
+        }, 0);
+        await page.waitForTimeout(500);
+        await page.click('#records-2', {
+            button: 'right',
+        });
+        // await page.waitForTimeout(10000);
+        await page.click('#grid-play-this-command');
+
+        await page.waitForFunction(function() {
+            return isPlaying === false;
+        }, { timeout: 0 });
+        let result = await page.evaluate(function() {
+            return $(`#records-2`).hasClass("executing");
+        }, 0);
+
+
+        console.log(result);
+        // })
 
 
 
