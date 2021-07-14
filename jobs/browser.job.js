@@ -18,7 +18,7 @@ async function openExtension(browser) {
     let extensionPopupURL = await getExtensionPopupURL(browser);
     let extensionTarget = await browser.waitForTarget(target => {
         return target.url() === extensionPopupURL;
-    });
+    }, {timeout: 0});
 
     await browser.newPage();
 

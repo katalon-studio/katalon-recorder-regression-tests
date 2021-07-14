@@ -30,9 +30,7 @@ async function removeExistingData(extensionPage) {
 
 async function loadTestSuiteToExtension(extensionPage, data) {
     return extensionPage.evaluate(function(data) {
-        document.addEventListener("DOMContentLoaded", function(event) {
-            readSuiteFromString(data);
-        });
+        readSuiteFromString(data);
     }, data);
 }
 
