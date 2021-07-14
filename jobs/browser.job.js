@@ -51,12 +51,14 @@ async function getChromiumBrowser(extensionPath) {
     return await puppeteer.launch({
         headless: false,
         // Chrome options
-        ignoreDefaultArgs: ["--disable-extensions"],
+        executablePath: process.env.PUPPETEER_EXEC_PATH,
         args: [
-            `--disable-extensions-except=${extensionPath}`,
+            `--no-sandbox`,
+            '--disable-setuid-sandbox',
             `--load-extension=${extensionPath}`,
+            `--disable-extensions-except=${extensionPath}`,
             `--window-size=${browserSize.width},${browserSize.height}`
-        ]
+        ],
     });
 }
 
