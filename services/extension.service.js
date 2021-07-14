@@ -28,9 +28,13 @@ const getPageAndData = async(testsuitePath) => {
 
         const htmlFilePath = testsuitePath;
         let sample = await data.loadSampleDataFile(htmlFilePath);
-        let testCases = await data.loadTestSuiteToExtension(page, sample);
+        await data.loadTestSuiteToExtension(page, sample);
+        let value1 = await data.loadSampleDataFile('sample/data.csv');
+        await data.loadDataFileToExtension(page, 'data.csv', value1);
+        let value2 = await data.loadSampleDataFile('sample/todomvc_site.csv');
+        await data.loadDataFileToExtension(page, 'todomvc_site.csv', value2);
 
-        return { browser, page, testCases };
+        return { browser, page };
     } catch (err) {
         throw err;
     }

@@ -15,7 +15,7 @@ const runTestcase = async(page) => {
 
 const runFromSpecifiedCommandOfTestcase = async(page) => {
     await page.evaluate(() => {
-        $('#case1').click();
+        $('#case15').click();
         $('#records-2').click();
     }, 0);
     await page.waitForTimeout(500);
@@ -27,14 +27,14 @@ const runFromSpecifiedCommandOfTestcase = async(page) => {
         return isPlaying === false;
     }, { timeout: 0 });
     let result = await page.evaluate(function() {
-        return $(`#case1`).hasClass("success");
+        return $(`#case15`).hasClass("success");
     }, 0);
     return result;
 }
 
 const runCommandOfTestCase = async(page) => {
     await page.evaluate(() => {
-        $('#case1').click();
+        $('#case15').click();
         $('#records-2').click();
     }, 0);
     await page.waitForTimeout(500);

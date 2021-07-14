@@ -36,8 +36,21 @@ async function loadTestSuiteToExtension(extensionPage, data) {
     }, data);
 }
 
+async function loadDataFileToExtension(extensionPage, name, value) {
+    return extensionPage.evaluate(function(value, name) {
+        window.addEventListener('load', (event) => {
+            dataFiles[name] = {
+                content: value,
+                type: 'csv'
+            };
+            saveDataFiles();
+        });
+    }, value, name);
+}
+
 module.exports = {
     loadSampleDataFile,
     loadTestSuiteToExtension,
-    removeExistingData
+    removeExistingData,
+    loadDataFileToExtension
 }

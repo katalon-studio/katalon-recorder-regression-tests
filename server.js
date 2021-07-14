@@ -29,34 +29,30 @@ const { config } = require('./configs/config-env');
         const htmlFilePath = "sample/data.html";
         let sample = await data.loadSampleDataFile(htmlFilePath);
         await data.loadTestSuiteToExtension(page, sample)
-
-        //play step by step and check status
-        // for (let i = 0; i < testCases.count; i++) {
-        // await page.waitForTimeout(1000);
+        let value1 = await data.loadSampleDataFile('sample/data.csv');
+        await data.loadDataFileToExtension(page, 'data.csv', value1);
+        let value2 = await data.loadSampleDataFile('sample/todomvc_site.csv');
+        await data.loadDataFileToExtension(page, 'todomvc_site.csv', value2)
+            //play step by step and check status
+            // for (let i = 0; i < testCases.count; i++) {
+            // await page.waitForTimeout(1000);
         console.log(`Executing test case ${0}`);
-        // await new Promise((resolve) => page.on('load', resolve));
-        await page.waitForTimeout(500);
-        // page.on('load', async() => {
-        await page.waitForSelector('#case1');
+        await new Promise((resolve) => page.on('load', resolve));
         await page.evaluate(() => {
-            $('#case1').click();
+            $('#case13').click();
             $('#records-2').click();
         }, 0);
         await page.waitForTimeout(500);
         await page.click('#records-2', {
             button: 'right',
         });
-        // await page.waitForTimeout(10000);
-        await page.click('#grid-play-this-command');
-
+        await page.click('#grid-play-from-here');
         await page.waitForFunction(function() {
             return isPlaying === false;
         }, { timeout: 0 });
         let result = await page.evaluate(function() {
-            return $(`#records-2`).hasClass("executing");
+            return $(`#case13`).hasClass("success");
         }, 0);
-
-
         console.log(result);
         // })
 
