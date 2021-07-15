@@ -10,41 +10,35 @@ async function loadSampleDataFile(filePath) {
 
 async function removeExistingData(extensionPage) {
     return extensionPage.evaluate(function() {
-        document.addEventListener("DOMContentLoaded", function(event) {
-            remove_testSuite();
-            sideex_wait = {
-                next_command_wait: false,
-                done: true
-            };
-            sideex_testCase = {
-                count: 0
-            };
+        remove_testSuite();
+        sideex_wait = {
+            next_command_wait: false,
+            done: true
+        };
+        sideex_testCase = {
+            count: 0
+        };
 
-            sideex_testSuite = {
-                count: 0
-            };
-        });
+        sideex_testSuite = {
+            count: 0
+        };
     });
 }
 
 
 async function loadTestSuiteToExtension(extensionPage, data) {
     return extensionPage.evaluate(function(data) {
-        document.addEventListener("DOMContentLoaded", function(event) {
-            readSuiteFromString(data);
-        });
+        readSuiteFromString(data);
     }, data);
 }
 
 async function loadDataFileToExtension(extensionPage, name, value) {
     return extensionPage.evaluate(function(value, name) {
-        window.addEventListener('load', (event) => {
-            dataFiles[name] = {
-                content: value,
-                type: 'csv'
-            };
-            saveDataFiles();
-        });
+        dataFiles[name] = {
+            content: value,
+            type: 'csv'
+        };
+        saveDataFiles();
     }, value, name);
 }
 
