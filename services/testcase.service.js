@@ -1,22 +1,23 @@
 const runTestcase = async(page) => {
-    await page.evaluate(() => {
+    const testCaseID = await page.evaluate(() => {
         const firstTestCase = KRData.testSuites[0].testCases[0];
         $(`#${firstTestCase.id}`).click();
         $('#playback').click();
+        return firstTestCase.id;
     }, 0);
 
     await page.waitForFunction(function() {
         return isPlaying === false;
     }, { timeout: 0 });
-    let result = await page.evaluate(function() {
-        return $(`#case0`).hasClass("success");
-    }, 0);
+    let result = await page.evaluate(function(testCaseID) {
+        return $(`#${testCaseID}`).hasClass("success");
+    }, testCaseID);
     return result;
 }
 
 const runFromSpecifiedCommandOfTestcase = async(page) => {
     const testCaseID = await page.evaluate(() => {
-        const fifteenthTestCase = KRData.testSuites[0].testCases[14];
+        const fifteenthTestCase = KRData.testSuites[0].testCases[15];
         $(`#${fifteenthTestCase.id}`).click();
         $('#records-2').click();
         return fifteenthTestCase.id;
@@ -29,7 +30,8 @@ const runFromSpecifiedCommandOfTestcase = async(page) => {
     await page.waitForFunction(function() {
         return isPlaying === false;
     }, { timeout: 0 });
-    let result = await page.evaluate(function() {
+    let result = await page.evaluate(function(testCaseID) {
+        console.log("AAAAA", testCaseID);
         return $(`#${testCaseID}`).hasClass("success");
     }, testCaseID);
     return result;
@@ -37,7 +39,7 @@ const runFromSpecifiedCommandOfTestcase = async(page) => {
 
 const runCommandOfTestCase = async(page) => {
     const testCaseID = await page.evaluate(() => {
-        const fifteenthTestCase = KRData.testSuites[0].testCases[14];
+        const fifteenthTestCase = KRData.testSuites[0].testCases[15];
         $(`#${fifteenthTestCase.id}`).click();
         $('#records-2').click();
         return fifteenthTestCase.id;

@@ -1,6 +1,5 @@
 const runTestSuite = async(page) => {
     await page.evaluate(() => {
-        $('#case0').click();
         $('#playSuite').click();
     }, 0);
     await page.waitForTimeout(500);
@@ -35,15 +34,20 @@ const runAllTestSuites = async(page) => {
 }
 
 const runFromSpecifiedTestcase = async(page) => {
-    await page.evaluate(() => {
-        $('#case1').click();
+    const testCaseID = await page.evaluate(() => {
+        const secondTestCase = KRData.testSuites[0].testCases[1];
+        $(`#${secondTestCase.id}`).click();
+        return secondTestCase.id;
     }, 0);
-    await page.click('#case1', {
+    await page.evaluate((testCaseID)=>{
+        $(`#${testCaseID}`).contextmenu();
+    }, testCaseID)
+    /*await page.click(`#${testCaseID}`, {
         button: 'right'
-    });
-    await page.evaluate(function() {
-        $('#menucase1').find('a')[3].click();
-    }, 0);
+    });*/
+    await page.evaluate(function(testCaseID) {
+        $(`#menu${testCaseID}`).find('a')[3].click();
+    }, testCaseID);
     await page.waitForTimeout(500);
     await page.waitForFunction(function() {
         return $('#stop').is(':visible') === false;

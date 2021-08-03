@@ -1,4 +1,3 @@
-/*
 const ExtensionService = require('../services/extension.service');
 const TestSuiteService = require('../services/testsuite.service');
 
@@ -33,4 +32,4 @@ describe("Run test suite", () => {
         expect(result).toMatchObject({ pass: 13, fail: 2 });
 
     }, 200000)
-});*/
+});
