@@ -7,7 +7,7 @@ const browserSize = {
 async function openExtension(browser) {
     // find extension background target and load the page
     const extBackgroundTarget = await browser.waitForTarget(t => t.type() === 'background_page', {timeout: 0});
-    const extBackgroundPage = await extBackgroundTarget.page()
+    const extBackgroundPage = await extBackgroundTarget.page();
 
     // evaluate chrome object in context of background page:
     await extBackgroundPage.evaluate(() => {
@@ -24,7 +24,7 @@ async function openExtension(browser) {
 
     let page = await extensionTarget.page();
     //wait for page to finnish loading
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(1500);
     return page;
 }
 

@@ -14,19 +14,19 @@ describe("Run test case", () => {
         browser = extension.browser;
         let result = await TestCaseService.runTestcase(extension.page);
         await expect(result).toBe(true);
-    }, 100000);
+    }, 200000);
 
     it("Users can execute parts of a test case with Play From Here from a test case's context menu", async() => {
         let extension = await ExtensionService.getPageAndData("sample/data.html");
         browser = extension.browser;
         let result = await TestCaseService.runFromSpecifiedCommandOfTestcase(extension.page);
         await expect(result).toBe(true);
-    }, 100000);
+    }, 200000);
 
     it("Users can execute a command with Play This Command from a test case’s context menu.", async() => {
         let extension = await ExtensionService.getPageAndData("sample/data.html");
         browser = extension.browser;
         let result = await TestCaseService.runCommandOfTestCase(extension.page);
         await expect(result).toBe(true);
-    }, 100000);
+    }, 200000);
 });

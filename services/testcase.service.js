@@ -1,6 +1,7 @@
 const runTestcase = async(page) => {
     await page.evaluate(() => {
-        $('#case0').click();
+        const firstTestCase = KRData.testSuites[0].testCases[0];
+        $(`#${firstTestCase.id}`).click();
         $('#playback').click();
     }, 0);
 
@@ -14,9 +15,11 @@ const runTestcase = async(page) => {
 }
 
 const runFromSpecifiedCommandOfTestcase = async(page) => {
-    await page.evaluate(() => {
-        $('#case15').click();
+    const testCaseID = await page.evaluate(() => {
+        const fifteenthTestCase = KRData.testSuites[0].testCases[14];
+        $(`#${fifteenthTestCase.id}`).click();
         $('#records-2').click();
+        return fifteenthTestCase.id;
     }, 0);
     await page.waitForTimeout(500);
     await page.click('#records-2', {
@@ -27,15 +30,17 @@ const runFromSpecifiedCommandOfTestcase = async(page) => {
         return isPlaying === false;
     }, { timeout: 0 });
     let result = await page.evaluate(function() {
-        return $(`#case15`).hasClass("success");
-    }, 0);
+        return $(`#${testCaseID}`).hasClass("success");
+    }, testCaseID);
     return result;
 }
 
 const runCommandOfTestCase = async(page) => {
-    await page.evaluate(() => {
-        $('#case15').click();
+    const testCaseID = await page.evaluate(() => {
+        const fifteenthTestCase = KRData.testSuites[0].testCases[14];
+        $(`#${fifteenthTestCase.id}`).click();
         $('#records-2').click();
+        return fifteenthTestCase.id;
     }, 0);
     await page.waitForTimeout(500);
     await page.click('#records-2', {
