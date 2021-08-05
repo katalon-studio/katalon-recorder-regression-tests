@@ -25,10 +25,13 @@ const getPageAndData = async(testsuitePath) => {
                 chrome.storage.local.set(result);
             })
             // await data.removeExistingData(page);
-
+        await setTimeout(()=>{}, 1000);
         const htmlFilePath = testsuitePath;
         let sample = await data.loadSampleDataFile(htmlFilePath);
         await data.loadTestSuiteToExtension(page, sample);
+        await page.click('#testSuiteDropdown');
+        await page.click("#suite0 .dropdown");
+
         let value1 = await data.loadSampleDataFile('sample/data.csv');
         await data.loadDataFileToExtension(page, 'data.csv', value1);
         let value2 = await data.loadSampleDataFile('sample/todomvc_site.csv');

@@ -42,7 +42,7 @@ const runFromSpecifiedTestcase = async(page) => {
         button: 'right'
     });
     await page.evaluate(function() {
-        $('#menucase1').find('a')[3].click();
+        $('#menucase1').find('a')[0].click();
     }, 0);
     await page.waitForTimeout(500);
     await page.waitForFunction(function() {
