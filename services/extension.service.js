@@ -29,6 +29,7 @@ const getPageAndData = async(testsuitePath) => {
         const htmlFilePath = testsuitePath;
         let sample = await data.loadSampleDataFile(htmlFilePath);
         await data.loadTestSuiteToExtension(page, sample);
+        await setTimeout(()=>{}, 1000);
         await page.click('#testSuiteDropdown');
         await page.click("#suite0 .dropdown");
 
