@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const browserSize = {
-    width: 870,
-    height: 740
+    width: 1050,
+    height: 670
 }
 
 async function openExtension(browser) {
