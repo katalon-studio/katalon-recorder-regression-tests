@@ -28,6 +28,14 @@ async function removeExistingData(extensionPage) {
 
 async function loadTestSuiteToExtension(extensionPage, data) {
     await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const module = await extensionPage.evaluate(async function(){
+        let module = await import("./js/UI/view/records-grid/record-utils.js");
+        return JSON.stringify(Object.keys(module));
+    })
+
+    throw new Error(JSON.stringify(module));
+
     const typeOf = await extensionPage.evaluate(() => typeof window.readSuiteFromString);
     throw new Error(JSON.stringify(typeOf));
 
