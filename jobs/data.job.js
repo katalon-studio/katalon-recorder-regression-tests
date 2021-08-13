@@ -33,10 +33,8 @@ async function loadTestSuiteToExtension(extensionPage, data) {
         return JSON.stringify(Object.keys(module));
     })*/
     let typeOf = "undefined";
-    while (typeOf === "undefined"){
-        await new Promise(resolve => setTimeout(resolve, 500));
-        typeOf = await extensionPage.evaluate(() => typeof window.readSuiteFromString);
-    }
+    await new Promise(resolve => setTimeout(resolve, 500));
+    typeOf = await extensionPage.evaluate(() => typeof window.readSuiteFromString);
     /*throw new Error(JSON.stringify(module));*/
 
 
