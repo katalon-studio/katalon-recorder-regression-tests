@@ -36,7 +36,7 @@ async function loadTestSuiteToExtension(extensionPage, data) {
 
     /*throw new Error(JSON.stringify(module));*/
 
-    const typeOf = await extensionPage.evaluate(() => typeof window.readSuiteFromString);
+    const typeOf = await extensionPage.evaluate(() => typeof window.isSelecting);
     throw new Error(JSON.stringify(typeOf));
 
     return extensionPage.evaluate(async function(data) {
