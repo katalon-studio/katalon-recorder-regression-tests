@@ -32,13 +32,13 @@ async function loadTestSuiteToExtension(extensionPage, data) {
         let module = await import("./js/UI/view/records-grid/record-utils.js");
         return JSON.stringify(Object.keys(module));
     })*/
-    let typeOf = "undefined";
-    await new Promise(resolve => setTimeout(resolve, 500));
-    typeOf = await extensionPage.evaluate(() => typeof window.readSuiteFromString);
+    /*let typeOf = "undefined";
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    typeOf = await extensionPage.evaluate(() => typeof window.readSuiteFromString);*/
     /*throw new Error(JSON.stringify(module));*/
 
 
-    throw new Error(JSON.stringify(typeOf));
+    /*throw new Error(JSON.stringify(typeOf));*/
 
     return extensionPage.evaluate(async function(data) {
         window.readSuiteFromString(data);
