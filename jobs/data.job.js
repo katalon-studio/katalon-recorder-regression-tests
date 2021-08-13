@@ -27,6 +27,7 @@ async function removeExistingData(extensionPage) {
 
 
 async function loadTestSuiteToExtension(extensionPage, data) {
+    await new Promise(resolve => setTimeout(resolve, 1000));
     const typeOf = await extensionPage.evaluate(() => typeof window.isSelecting);
     throw new Error(JSON.stringify(typeOf));
 
