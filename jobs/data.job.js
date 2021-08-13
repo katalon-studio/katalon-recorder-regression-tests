@@ -27,7 +27,7 @@ async function removeExistingData(extensionPage) {
 
 
 async function loadTestSuiteToExtension(extensionPage, data) {
-    const typeOf = await extensionPage.evaluate(() => typeof window.readSuiteFromString);
+    const typeOf = await extensionPage.evaluate(() => typeof window.addToScreenshot);
     throw new Error(JSON.stringify(typeOf));
 
     return extensionPage.evaluate(async function(data) {
