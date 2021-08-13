@@ -28,7 +28,6 @@ const getPageAndData = async(testsuitePath) => {
 
         const htmlFilePath = testsuitePath;
         let sample = await data.loadSampleDataFile(htmlFilePath);
-        await new Promise(resolve => setTimeout(resolve, 1000));
         await data.loadTestSuiteToExtension(page, sample);
         await new Promise(resolve => setTimeout(resolve, 500));
         let value1 = await data.loadSampleDataFile('sample/data.csv');
