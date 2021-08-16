@@ -27,9 +27,7 @@ async function removeExistingData(extensionPage) {
 
 
 async function loadTestSuiteToExtension(extensionPage, data) {
-    let type = "";
-
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    extensionPage.waitForFunction(`typeof window.readSuiteFromString === "function"`)
     return extensionPage.evaluate(async function(data) {
         window.readSuiteFromString(data);
     }, data);
