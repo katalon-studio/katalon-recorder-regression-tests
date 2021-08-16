@@ -27,7 +27,7 @@ async function removeExistingData(extensionPage) {
 
 
 async function loadTestSuiteToExtension(extensionPage, data) {
-    return extensionPage.evaluate(function(data) {
+    return extensionPage.evaluate(async function(data) {
         window.readSuiteFromString(data);
     }, data);
 }
