@@ -46,7 +46,7 @@ const runFromSpecifiedTestcase = async(page) => {
         button: 'right'
     });*/
     await page.evaluate(function(testCaseID) {
-        $(`#menu${testCaseID}`).find('a')[3].click();
+        $(`#menu${testCaseID}`).find('a')[0].click();
     }, testCaseID);
     await page.waitForTimeout(500);
     await page.waitForFunction(function() {

@@ -25,11 +25,19 @@ const getPageAndData = async(testsuitePath) => {
                 chrome.storage.local.set(result);
             })
             // await data.removeExistingData(page);
-
+        await setTimeout(()=>{}, 1000);
         const htmlFilePath = testsuitePath;
         let sample = await data.loadSampleDataFile(htmlFilePath);
         await data.loadTestSuiteToExtension(page, sample);
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await setTimeout(()=>{}, 1000);
+        //click dropdown
+        await page.click('#testSuiteDropdown');
+        await page.evaluate(() => {
+            const testSuiteID = KRData.testSuites[0].id;
+            $(`#${testSuiteID} .dropdown`).click();
+        });
+
+
         let value1 = await data.loadSampleDataFile('sample/data.csv');
         await data.loadDataFileToExtension(page, 'data.csv', value1);
         let value2 = await data.loadSampleDataFile('sample/todomvc_site.csv');

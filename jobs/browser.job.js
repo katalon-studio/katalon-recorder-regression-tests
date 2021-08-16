@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const browserSize = {
-    width: 870,
-    height: 740
+    width: 1050,
+    height: 670
 }
 
 async function openExtension(browser) {
@@ -24,7 +24,7 @@ async function openExtension(browser) {
 
     let page = await extensionTarget.page();
     //wait for page to finnish loading
-    await page.waitForTimeout(1500);
+    await page.waitForTimeout(1000);
     return page;
 }
 
