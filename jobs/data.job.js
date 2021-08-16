@@ -30,11 +30,6 @@ async function loadTestSuiteToExtension(extensionPage, data) {
     let type = "";
 
     await new Promise(resolve => setTimeout(resolve, 2000));
-    type  = await extensionPage.evaluate(async function(){
-        return typeof window.readSuiteFromString;
-    });
-    throw type;
-
     return extensionPage.evaluate(async function(data) {
         window.readSuiteFromString(data);
     }, data);
