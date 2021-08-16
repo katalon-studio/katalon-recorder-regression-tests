@@ -34,6 +34,7 @@ async function loadTestSuiteToExtension(extensionPage, data) {
             return typeof window.readSuiteFromString;
         });
     }
+    throw type;
 
     return extensionPage.evaluate(async function(data) {
         window.readSuiteFromString(data);
