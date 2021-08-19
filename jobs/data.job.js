@@ -8,24 +8,6 @@ async function loadSampleDataFile(filePath) {
     });
 }
 
-async function removeExistingData(extensionPage) {
-    return extensionPage.evaluate(function() {
-        remove_testSuite();
-        sideex_wait = {
-            next_command_wait: false,
-            done: true
-        };
-        sideex_testCase = {
-            count: 0
-        };
-
-        sideex_testSuite = {
-            count: 0
-        };
-    });
-}
-
-
 async function loadTestSuiteToExtension(extensionPage, data) {
     await extensionPage.waitForFunction(`typeof window.readSuiteFromString === "function"`,
       {polling: 500});
@@ -47,6 +29,5 @@ async function loadDataFileToExtension(extensionPage, name, value) {
 module.exports = {
     loadSampleDataFile,
     loadTestSuiteToExtension,
-    removeExistingData,
     loadDataFileToExtension
 }

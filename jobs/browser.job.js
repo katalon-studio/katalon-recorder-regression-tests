@@ -23,8 +23,6 @@ async function openExtension(browser) {
     await browser.newPage();
 
     let page = await extensionTarget.page();
-    //wait for page to finnish loading
-    await page.waitForTimeout(1000);
     return page;
 }
 

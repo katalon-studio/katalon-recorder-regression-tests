@@ -2,9 +2,8 @@
     "name": "puppeteer_demo",
     "version": "1.0.0",
     "description": "",
-    "main": "server.js",
     "scripts": {
-        "test": "jest --detectOpenHandles --forceExit"
+        "test": "jest"
     },
     "keywords": [],
     "author": "",

@@ -24,14 +24,12 @@ const getPageAndData = async(testsuitePath) => {
                 };
                 chrome.storage.local.set(result);
             })
-            // await data.removeExistingData(page);
 
-        const htmlFilePath = testsuitePath;
-        let sample = await data.loadSampleDataFile(htmlFilePath);
+        let sample = await data.loadSampleDataFile(testsuitePath);
         await data.loadTestSuiteToExtension(page, sample);
 
         //click dropdown
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await page.waitForSelector("#testSuiteDropdown");
         await page.click('#testSuiteDropdown');
         await page.evaluate(() => {
             const testSuiteID = KRData.testSuites[0].id;

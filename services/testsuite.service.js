@@ -17,7 +17,6 @@ const runTestSuite = async(page) => {
 
 const runAllTestSuites = async(page) => {
     await page.evaluate(() => {
-        $('#case0').click();
         $('#playSuites').click();
     }, 0);
     await page.waitForTimeout(500);
@@ -42,9 +41,6 @@ const runFromSpecifiedTestcase = async(page) => {
     await page.evaluate((testCaseID)=>{
         $(`#${testCaseID}`).contextmenu();
     }, testCaseID)
-    /*await page.click(`#${testCaseID}`, {
-        button: 'right'
-    });*/
     await page.evaluate(function(testCaseID) {
         $(`#menu${testCaseID}`).find('a')[0].click();
     }, testCaseID);
