@@ -27,7 +27,11 @@ const getPageAndData = async(testsuitePath) => {
 
         let sample = await data.loadSampleDataFile(testsuitePath);
         await data.loadTestSuiteToExtension(page, sample);
-
+        await page.evaluate(() => {
+            if ($("#welcome-getStarted").length > 0){
+                $("#welcome-getStarted").click();
+            }
+        })
         //click dropdown
         await page.waitForSelector("#testSuiteDropdown");
         await page.click('#testSuiteDropdown');
