@@ -31,6 +31,11 @@ const getPageAndData = async(testsuitePath) => {
             if ($("#welcome-getStarted").length > 0){
                 $("#welcome-getStarted").click();
             }
+        });
+        await page.evaluate(() => {
+            if ($("#skipBtn").length > 0){
+                $("#skipBtn").click();
+            }
         })
         //click dropdown
         await page.waitForSelector("#testSuiteDropdown");
