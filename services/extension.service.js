@@ -33,8 +33,8 @@ const getPageAndData = async(testsuitePath) => {
             }
         });
         await page.evaluate(() => {
-            if ($("#skipBtn").length > 0){
-                $("#skipBtn").click();
+            if ($(".skipBtn").length > 0){
+                $(".skipBtn").click();
             }
         })
         //click dropdown
