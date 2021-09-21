@@ -30,7 +30,7 @@ const runFromSpecifiedCommandOfTestcase = async(page) => {
         return isPlaying === false;
     }, { timeout: 0 });
     let result = await page.evaluate(function(testCaseID) {
-        return $(`#${testCaseID}`).hasClass("success");
+        return $(`#${testCaseID}`).hasClass("fail");
     }, testCaseID);
     return result;
 }
