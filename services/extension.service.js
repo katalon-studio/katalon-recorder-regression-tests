@@ -12,26 +12,27 @@ const getPageAndData = async(testsuitePath) => {
 
         await page.keyboard.press('Escape');
         await page.evaluate(function() {
-                let result = {
-                    checkLoginData: {
-                        recordTimes: 0,
-                        playTimes: 0,
-                        hasLoggedIn: true,
-                        user: "",
-                        isActived: true,
-                        passedTestCase: 0
-                    },
-                };
-                chrome.storage.local.set(result);
-            })
+            let result = {
+                checkLoginData: {
+                    recordTimes: 0,
+                    playTimes: 0,
+                    hasLoggedIn: true,
+                    user: "",
+                    isActived: true,
+                    passedTestCase: 0
+                },
+            };
+            chrome.storage.local.set(result);
+        })
 
         let sample = await data.loadSampleDataFile(testsuitePath);
         await data.loadTestSuiteToExtension(page, sample);
         await page.evaluate(() => {
-            if ($("#welcome-getStarted").length > 0){
+            if ($("#welcome-getStarted").length > 0) {
                 $("#welcome-getStarted").click();
             }
-        })
+        });
+        await page.keyboard.press('Escape');
         //click dropdown
         await page.waitForSelector("#testSuiteDropdown");
         await page.click('#testSuiteDropdown');
@@ -39,7 +40,6 @@ const getPageAndData = async(testsuitePath) => {
             const testSuiteID = KRData.testSuites[0].id;
             $(`#${testSuiteID} .dropdown`).click();
         });
-
 
         let value1 = await data.loadSampleDataFile('sample/data.csv');
         await data.loadDataFileToExtension(page, 'data.csv', value1);

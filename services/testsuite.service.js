@@ -38,7 +38,7 @@ const runFromSpecifiedTestcase = async(page) => {
         $(`#${secondTestCase.id}`).click();
         return secondTestCase.id;
     }, 0);
-    await page.evaluate((testCaseID)=>{
+    await page.evaluate((testCaseID) => {
         $(`#${testCaseID}`).contextmenu();
     }, testCaseID)
     await page.evaluate(function(testCaseID) {
@@ -57,8 +57,25 @@ const runFromSpecifiedTestcase = async(page) => {
     return result;
 }
 
+const openTestsuiteWithFile = async(page) => {
+    await page.click('#suite-open');
+
+    await page.waitForSelector("#suite-open-recorder");
+    await page.click('#suite-open-recorder');
+
+    let result = true;
+    // await page.evaluate(async function() {
+    //     return {
+    //         pass: parseFloat($(`#result-runs`).html()),
+    //         fail: parseFloat($(`#result-failures`).html())
+    //     };
+    // }, 0);
+    return result;
+}
+
 module.exports = {
     runTestSuite,
     runAllTestSuites,
-    runFromSpecifiedTestcase
+    runFromSpecifiedTestcase,
+    openTestsuiteWithFile
 }

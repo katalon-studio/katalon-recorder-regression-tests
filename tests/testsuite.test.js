@@ -29,3 +29,14 @@ describe("Run test suite", () => {
         await browser.close();
     }, 200000)
 });
+
+// describe("Open a test suite", () => {
+//     it.concurrent("Can open a test suite both (.krecorder) and (.html)", async() => {
+//         const extension = await ExtensionService.getPageAndData("sample/data.html");
+//         const browser = extension.browser;
+//         const extensionPage = extension.page;
+//         const result = await TestSuiteService.runTestSuite(extensionPage);
+//         await expect(result).toMatchObject({ pass: 14, fail: 2 });
+//         await browser.close();
+//     }, 200000);
+// });
