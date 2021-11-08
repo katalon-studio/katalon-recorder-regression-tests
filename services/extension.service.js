@@ -10,7 +10,6 @@ const getPageAndData = async(testsuitePath) => {
         let browser = await service.getChromiumBrowser(paths);
         let page = await service.openExtension(browser);
 
-        await page.keyboard.press('Escape');
         await page.evaluate(function() {
                 let result = {
                     checkLoginData: {
@@ -36,7 +35,8 @@ const getPageAndData = async(testsuitePath) => {
             if ($(".skipBtn").length > 0){
                 $(".skipBtn").click();
             }
-        })
+        });
+        await page.keyboard.press('Escape');
         //click dropdown
         await page.waitForSelector("#testSuiteDropdown");
         await page.click('#testSuiteDropdown');
