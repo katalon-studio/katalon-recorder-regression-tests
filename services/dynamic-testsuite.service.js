@@ -29,20 +29,28 @@ const createTagViaTagManagement = async(page) => {
 const runByClickOnTestCaseTag = async(page) => {
     const testCaseID = await page.evaluate(() => {
         const firstTestCase = KRData.testSuites[0].testCases[0];
+        console.log(firstTestCase.id)
         return firstTestCase.id;
     }, 0);
 
-    await page.click(`#tags-icon-${testCaseID}`);
+    await page.evaluate((testCaseID) => {
+        $(`#tags-icon-${testCaseID}`).click();
+    }, testCaseID)
     //click on test case's tag
+    await page.waitForSelector(`#button-tags${testCaseID} > div:nth-child(2)`);
     await page.click(`#button-tags${testCaseID} > div:nth-child(2)`);
     //click "Execute" button to create new dynamic test suite
+    await page.waitForSelector("#button-quick-actions > span:nth-child(2)");
     await page.click("#button-quick-actions > span:nth-child(2)");
     return await TestSuiteService.runTestSuite(page);
 }
 
 const runByCreateNewDynamicTestSuite = async(page) => {
-    await page.click("#dynamic-plus");
+    await page.evaluate(() => {
+        $(`#dynamic-plus`).click();
+    })
     //type tag name to dynamic test suite tag filter
+    await page.waitForSelector("#input-dynamic > div:nth-child(3) > input:nth-child(1)");
     await page.type("#input-dynamic > div:nth-child(3) > input:nth-child(1)", "feature-a");
     //click "Apply" button
     await page.click("#input-dynamic > div:nth-child(3) > div:nth-child(3)");
